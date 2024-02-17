@@ -17,7 +17,7 @@
         </div>
         <h2>Ablation Study</h2>
         <div class="options">
-            <div class="option" v-for="k in keys" :key="k['title']" :class="{ selected: k['title'] == selectedKeyTitle }">"{{ k['sent'] }}"</div>
+            <div class="option" v-for="k in keys" :key="k['title']" :class="{ selected: k['title'] == selectedKeyTitle }" @click="changeKeyTitle(k['title'])">"{{ k['sent'] }}"</div>
         </div>
         <div class="block">
             <h3>Intensity Control</h3>
@@ -38,7 +38,7 @@
             <div>We use guidance scale w = 1.</div>
             <h4>Unseen Descriptions</h4>
             <div class="section">
-                <div class="gd" :key="n" v-for="n in nlc">
+                <div class="gd" :key="n" v-for="n in nlc[selectedKeyTitle]">
                     <span>{{ n['ne'] }}</span>
                     <audio :src="n['link']" controls></audio>
                 </div>
@@ -48,7 +48,7 @@
             <h3>Mixed Emotions</h3>
             <div>We use guidance scale w = 1.</div>
             <div>
-                <div v-for="(mev, me) in mixed" :key="me">
+                <div v-for="(mev, me) in mixed[selectedKeyTitle]" :key="me">
                     <h4>{{ me }}</h4>
                     <div class="section">
                         <div class="gd" :key="m" v-for="m in mev">
