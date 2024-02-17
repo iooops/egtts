@@ -1,3 +1,67 @@
-Emotion-Guided TTS: Natural-Language-Prompted and Guided Mixed Emotion TTS with Diffusion
 
-TODO: add samples
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Emotion-Guided TTS: Natural-Language-Prompted and Guided Mixed Emotion TTS with Diffusion</title>
+    <link href="./index.css" rel="stylesheet" />
+</head>
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+    <div id="app">
+        <h1 class="title">Emotion-Guided TTS: Natural-Language-Prompted and Guided Mixed Emotion TTS with Diffusion</h1>
+        <div>We use speak id 15. w is the guidance scale.</div>
+        <div class="block">
+            <h3>MOS Comparison</h3>
+        </div>
+        <h2>Ablation Study</h2>
+        <div class="options">
+            <div class="option" v-for="k in keys" :key="k['title']" :class="{ selected: k['title'] == selectedKeyTitle }">"{{ k['sent'] }}"</div>
+        </div>
+        <div class="block">
+            <h3>Intensity Control</h3>
+            <div>
+                <div v-for="(eev, ee) in guidance_distortion[selectedKeyTitle]" :key="ee">
+                    <h4>{{ ee }}</h4>
+                    <div class="section">
+                        <div class="gd" :key="gd" v-for="gd in eev">
+                            <span>w = {{ gd['gs'] }}</span>
+                            <audio :src="gd['link']" controls></audio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <h3>Natural Language Control</h3>
+            <div>We use guidance scale w = 1.</div>
+            <h4>Unseen Descriptions</h4>
+            <div class="section">
+                <div class="gd" :key="n" v-for="n in nlc">
+                    <span>{{ n['ne'] }}</span>
+                    <audio :src="n['link']" controls></audio>
+                </div>
+            </div>
+        </div>
+        <div class="block">
+            <h3>Mixed Emotions</h3>
+            <div>We use guidance scale w = 1.</div>
+            <div>
+                <div v-for="(mev, me) in mixed" :key="me">
+                    <h4>{{ me }}</h4>
+                    <div class="section">
+                        <div class="gd" :key="m" v-for="m in mev">
+                            <span>{{ (1 - m['i']).toFixed(1) }}_{{ m['i'].toFixed(1) }}</span>
+                            <audio :src="m['link']" controls></audio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./script.js"></script>
+</body>
+</html>
+
