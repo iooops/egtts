@@ -9,6 +9,21 @@ createApp({
         
         const keys = [{ title: 'sample_3', sent: 'Her shoes were like fishes.' }, { title: 'sample_2', sent: 'And what are doves. And what are doves.' }]
         const selectedKeyTitle = ref('sample_3')
+
+        const mos = {
+            'sample_3': {
+                'GT': baseUrl + 'egtts/MOS/0015_000362.wav',
+                'MixedEmotion': baseUrl + 'egtts/MOS/Mel_62_ref_Angry_TTS.wav',
+                'EmoDiff': baseUrl + 'egtts/MOS/0015-Angry_000362.wav',
+                'Ours': baseUrl + 'egtts/Guidance_Distortion/Angry_/w1_A1.0/sample_3_20.wav'
+            }, 
+            'sample_2': {
+                'GT': baseUrl + 'egtts/MOS/0015_001072.wav',
+                'MixedEmotion': baseUrl + 'egtts/MOS/Mel_72_ref_Sad_TTS.wav',
+                'EmoDiff': baseUrl + 'egtts/MOS/0015-Sad_001072.wav',
+                'Ours': baseUrl + 'egtts/Guidance_Distortion/Sad_/w1_S1.0/sample_2_20.wav'
+            }
+        }
         
         const existing_emos = ['Neutral', 'Angry', 'Happy', 'Sad', 'Surprise']
         const guidance_scales = [...Array.from({ length: 21 }, (_, i) => i), ...[30, 40, 50]] 
@@ -58,6 +73,7 @@ createApp({
         return {
             selectedKeyTitle,
             keys,
+            mos,
             guidance_distortion,
             nlc,
             mixed,

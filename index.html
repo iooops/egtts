@@ -12,13 +12,19 @@
     <div id="app">
         <h1 class="title">Emotion-Guided TTS: Natural-Language-Prompted and Guided Mixed Emotion TTS with Diffusion</h1>
         <div>We use speak id 15. w is the guidance scale.</div>
-        <div class="block">
-            <h3>MOS Comparison</h3>
-        </div>
-        <h2>Ablation Study</h2>
         <div class="options">
             <div class="option" v-for="k in keys" :key="k['title']" :class="{ selected: k['title'] == selectedKeyTitle }" @click="changeKeyTitle(k['title'])">"{{ k['sent'] }}"</div>
         </div>
+        <div class="block">
+            <h3>MOS Comparison</h3>
+            <div class="section">
+                <div class="gd" v-for="(mv, mk) in mos[selectedKeyTitle]">
+                    <span>{{ mk }}</span>
+                    <audio :src="mv" controls></audio>
+                </div>
+            </div>
+        </div>
+        <!-- <h2>Ablation Study</h2> -->
         <div class="block">
             <h3>Intensity Control</h3>
             <div>
